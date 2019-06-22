@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+
+	<header th:fragment="header">
+		
+		<div>
+
+			<div sec:authorize="!hasAnyRole('USER','ADMIN')">
+				<nav class="nav-fixed">
+					<div class="nav-wrapper red darken-1">
+						<a th:href="@{/}" class="brand-logo center"><img class="logo-img" height="50px" th:src="@{/img/branco.png}"></a>
+						<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+						<ul class="left hide-on-med-and-down">
+							<li><a th:href="@{/logar}" class="waves-effect waves-light btn-small"> Entrar/Cadastrar </a></li>
+						</ul>
+						<ul class="right hide-on-med-and-down">
+							<li class="active"><a th:href="@{/}">Home</a></li>
+						</ul>
+					</div>
+				</nav>
+
+				<ul class="sidenav" id="mobile-demo">
+					<li><a th:href="@{/logar}" class="waves-effect waves-light btn-small"> Entrar/Cadastrar </a></li>
+					<li class="active"><a th:href="@{/}"><i class="material-icons">home</i> HOME</a></li>
+				</ul>
+
+			</div>
+
+			<div sec:authorize="hasRole('USER')">
+				<nav class="nav-fixed">
+					<div class="nav-wrapper red darken-1">
+						<a th:href="@{/}" class="brand-logo center"><img class="logo-img" height="50px" th:src="@{/img/branco.png}"></a>
+						<a href="#" data-target="mobile-demo-user" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+						<ul class="left hide-on-med-and-down">
+							<li><a th:href="@{javascript:void(0)}" onclick="openNav()" class="waves-effect waves-light btn-small"> olá, <span th:text="${#authentication.name}"></span> </a></li>
+						</ul>
+						<ul class="right hide-on-med-and-down">
+							<li class="active"><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{javascript:void(0)}" onclick="openSacola()">Sacola <i class="material-icons right">card_giftcard</i></a> </li>
+						</ul>
+					</div>
+				</nav>
+
+				<ul class="sidenav" id="mobile-demo-user">
+					<li class="active"><a th:href="@{/}"><i class="material-icons">home</i> HOME</a></li>
+					<li><a th:href="@{javascript:void(0)}" onclick="openSacola()">SACOLA <i class="material-icons left">card_giftcard</i></a></li>
+					<li><div class="divider"></div></li>
+					<li><a th:href="@{/cliente/dadosCliente/}" class="meus-dados"> <i class="material-icons">account_box</i> &nbsp MEUS DADOS</a> </li>
+					<li><a th:href="@{/cliente/enderecosCliente/}" class="meus-dados" href="#"> <i class="material-icons">chrome_reader_mode</i> &nbsp ENDEREÇOS</a> </li>
+					<li><a th:href="@{/cliente/pedidosCliente/}" class="meus-dados" href="#"> <i class="material-icons">event_available</i> &nbsp PEDIDOS</a></li>
+					<li><a th:href="@{/logout}" class="waves-effect waves-light btn-small"> Logout </a></li>
+				</ul>
+
+			</div>
+
+			<div sec:authorize="hasRole('ADMIN')">
+				<nav class="nav-fixed">
+					<div class="nav-wrapper red darken-1">
+						<a th:href="@{/}" class="brand-logo center"><img class="logo-img" height="50px" th:src="@{/img/branco.png}"></a> <a href="#"
+							data-target="mobile-demo-admin" class="sidenav-trigger"><i
+							class="material-icons">menu</i></a>
+						<ul class="left hide-on-med-and-down">
+							<li><a th:href="@{javascript:void(0)}" class="waves-effect waves-light btn-small">Olá, gerente!</a></li>
+						</ul>
+						<ul class="right hide-on-med-and-down">
+							<li class="active"><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{/gerente/listarPedidosPendentes/}">Pedido Pendentes </a></li>
+							<li><a class="dropdown-trigger" href="#dropdown1">Gerenciar <i class="material-icons right">arrow_drop_down</i></a></li>
+						</ul>
+					</div>
+				</nav>
+
+				<!-- Dropdown Structure -->
+				<ul id="dropdown1" class="dropdown-content">
+					<li><a th:href="@{/gerente/addPrato/}">Adicionar Prato</a></li>
+					<li><a th:href="@{/gerente/listarPratos/}">Listar Pratos</a></li>
+					<li><a th:href="@{/gerente/listarPedidosEnviados/}">Pedido Enviados</a></li>
+					<li><a th:href="@{/logout}"> Logout </a></li>
+				</ul>
+
+				<ul class="sidenav" id="mobile-demo-admin">
+					<li><a th:href="@{/cliente/cadCliente}" class="waves-effect waves-light btn-small">Entrar/Cadastrar</a></li>
+					<li class="active"><a th:href="@{/}">Home</a></li>
+					<li><a th:href="@{/gerente/addPrato/}">Adicionar Prato</a></li>
+					<li><a th:href="@{/gerente/listarPratos/}">Listar Pratos</a></li>
+					<li><a th:href="@{/gerente/listarPedidosEnviados/}">Pedido Enviados</a></li>
+					<li><a th:href="@{/gerente/listarPedidosPendentes/}">Pedido Pendentes<span class="new badge">4</span></a></li>
+				</ul>
+			</div>
+		
+		</div>
+		
+	</header>
+	
+	<div th:fragment="menu-dados-cliente" sec:authorize="hasRole('USER')">
+	
+		<div id="mySidenav" class="sidenav-dados">
+			<a href="javascript:void(0)" class="closebtn meus-dados" onclick="closeNav()">&times;</a>
+			<a th:href="@{/cliente/dadosCliente/}" class="meus-dados"> <i class="material-icons">account_box</i> &nbsp MEUS DADOS</a> 
+			<a th:href="@{/cliente/enderecosCliente/}" class="meus-dados"> <i class="material-icons">chrome_reader_mode</i> &nbsp ENDEREÇOS</a>
+			<a th:href="@{/cliente/pedidosCliente/}" class="meus-dados"> <i class="material-icons">event_available</i> &nbsp PEDIDOS</a>
+			<a th:href="@{/logout} "id="logout-cliente" class="waves-effect waves-light btn-small"> Logout </a>
+		</div>
+	
+	</div>
+	
+	<div th:fragment="js">
+		<!--JavaScript at end of body for optimized loading-->
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.mask.min.js}"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.sidenav').sidenav();
+				$('input#nome, #sobrenome').characterCounter();
+				$('.datepicker').datepicker({
+					 format: 'dd/mm/yyyy',
+					 showClearBtn: true,
+					 yearRange: 15,
+					 maxDate: new Date(2005,01,01),
+					 defaultDate: new Date(1995,01,01),
+					 closeOnSelect: false
+				 });
+				$('select').formSelect();
+				$('.modal').modal();
+				$('.tooltipped').tooltip();
+				$(".dropdown-trigger").dropdown();
+			});
+		</script>
+		
+		<script>
+	
+			/* Set the width of the side navigation to 250px */
+			function openNav() {
+			  document.getElementById("mySidenav").style.width = "200px";
+			}
+		
+			/* Set the width of the side navigation to 0 */
+			function closeNav() {
+			  document.getElementById("mySidenav").style.width = "0";
+			}
+			
+			/* Set the width of the side navigation to 250px */
+			function openSacola() {
+			  document.getElementById("sacola").style.width = "500px";
+			}
+		
+			/* Set the width of the side navigation to 0 */
+			function closeSacola() {
+			  document.getElementById("sacola").style.width = "0";
+			}
+			
+		</script>
+
+	</div>
+
+</body>
+</html>

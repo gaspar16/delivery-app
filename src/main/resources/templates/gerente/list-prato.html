@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<!--Import Google Icon Font-->
+<link th:href="@{/css/icon.css}" rel="stylesheet"/>
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Olá, mundo!</title>
+</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="container">
+
+		<table class="highlight">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Preço</th>
+					<th>Imagem</th>
+					<th>Editar </th>
+					<th>Excluir </th>
+				</tr>
+			</thead>
+
+			<tbody th:each="prato : ${pratos}">
+				<tr>
+					<td> <span th:text="${prato.nome}"></span>  </td>
+					<td> <span th:text="${prato.preco}"></span> </td>
+					<td> <img width="200" height="100" th:src="@{'/images/'+${prato.codigo}+'.png'}"> </td>
+					<td> <a th:href="@{/gerente/editPrato/{codigo}(codigo=${prato.codigo})}"><i class="material-icons">create</i></a> </td>
+					<td> <a th:href="@{/gerente/excluirPrato/{codigo}(codigo=${prato.codigo})}"><i class="material-icons">delete</i></a> </td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<!--Import jQuery before materialize.js-->
+	<div th:replace="fragments/header :: js"></div>
+
+</body>
+</html>

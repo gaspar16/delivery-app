@@ -1,0 +1,133 @@
+body {
+	padding-top: 70px;
+}
+
+.nav-fixed {
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	margin-bottom: 0px;
+	z-index: 997;
+}
+
+.card-image .card-title img {
+	width: 200px;
+	height: 150px
+}
+
+.card .card-image img {
+	height: 300px;
+}
+
+.card .card-image .card-title img {
+	height: 150px;
+}
+
+.section .card-image img {
+	height: 120px;
+}
+
+/* SIDENAV DADOS */
+/* The side navigation menu */
+
+.sidenav-dados {
+  height: 95%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  margin-top: 50px;
+}
+
+.sidenav-dados .meus-dados {
+  padding: 8px 8px 8px 25px;
+  text-decoration: none;
+  font-size: 15px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav-dados .meus-dados:hover {
+  color: #f1f1f1;
+}
+
+.sidenav-dados .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#logout-cliente{
+	width: 150px;
+	margin-top: 10px;
+	margin-left: 25px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav-dados {padding-top: 15px;}
+  .sidenav-dados .meus-dados {font-size: 18px;}
+}
+
+/* ---------------------------- SIDENAV SACOLA ------------------------------------------- */
+/*C---------------------------- The side navigation menu ----------------------------------*/
+
+.sidenav-sacola {
+  height: 95%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 50px;
+  margin-top: 50px;
+}
+
+#main {
+  transition: margin-right .5s;
+  padding: 16px;
+}
+
+.sidenav-sacola .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav-sacola {padding-top: 15px;}
+  /*.sidenav-sacola .meus-dados {font-size: 18px;}*/
+}
+
+.modal-index{
+	width: 400px;
+}
+
+.modal-index p{
+	size: 50px;
+}
+
+.logo-img{
+    padding-top: 5px;
+}
+
+
+/* ----------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------------- */
+
+.form-login .card{
+    width: 500px;
+}
+

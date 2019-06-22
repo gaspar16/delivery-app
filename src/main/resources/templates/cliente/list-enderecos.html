@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--Import Google Icon Font-->
+    <link th:href="@{/css/icon.css}" rel="stylesheet"/>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div th:replace="fragments/header :: menu-dados-cliente"></div>
+
+<div th:replace="sacola/index :: sacola"></div>
+
+<main>
+
+    <div class="container">
+        <form method="post">
+
+            <table class="highlight">
+                <thead>
+                    <tr>
+                        <th> Endereço </th>
+                        <th> Status </th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                        <tr th:each="endereco : ${enderecosCliente}">
+<!--                            <td> <p> <label> <input class="with-gap" name="id" th:value="*{endereco.id}" type="radio"/> <span></span> </label> </p> </td>-->
+                            <td>
+                                <span th:text="${endereco.logradouro}"></span>
+                                <span th:text="', '+${endereco.numero}"></span>
+                                <th:block>
+                                    <span th:if="${endereco.complemento} == ''" th:text="' - '"> </span>
+                                    <span th:unless="${endereco.complemento} == ''" th:text="' - '+${endereco.complemento}+' - '"> </span>
+                                </th:block>
+                                <span th:text="${endereco.bairro} + ' - '"></span>
+                                <span th:text="${endereco.cidade} + ' - '"></span>
+                                <span th:text="${endereco.uf}"></span> </td>
+                            <td> <span th:text="${endereco.status == 0 ? 'Desativado' : 'Ativo'}"></span> </td>
+                        </tr>
+
+
+                </tbody>
+
+            </table>
+
+            <br>
+
+            <a th:href="@{/cliente/cadEndereco/{codigo}(codigo=${cliente.codigo})}" class="waves-effect waves-light btn red darken-1"><i class="material-icons right">add_circle</i>Adicionar</a>
+
+        </form>
+
+
+    </div>
+
+</main>
+
+<div th:replace="fragments/header :: js"></div>
+
+</body>
+</html>
